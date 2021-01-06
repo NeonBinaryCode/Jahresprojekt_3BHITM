@@ -1,0 +1,119 @@
+.container-main {
+	position: relative;
+	display: flex;
+	margin-top: 10vh;
+	background: var(--box-color);
+	border-radius: 2vw;
+	height: 50vh;
+	box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.login,
+.signup,
+.coverup {
+	width: 50%;
+	height: 50vh;
+	padding: 3vh 2vw;
+	border-radius: 2vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.title {
+	font-family: var(--headings) !important;
+	font-weight: bold;
+	font-size: 1.5rem;
+	margin-bottom: 5vh;
+}
+
+.container-main button {
+	color: white;
+	padding: 1vh 1vw;
+	background: var(--accent-color);
+	border: none;
+	border-radius: 0.5vw;
+}
+
+.container-main button:hover {
+	box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Coverup */
+
+.coverup {
+	z-index: 2;
+	transition: left 0.5s;
+	background: var(--accent-color);
+	box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.coverup p {
+	color: var(--background-color);
+}
+
+.coverup.right {
+	position: absolute;
+	left: 50%;
+}
+
+.coverup.left {
+	position: absolute;
+	left: 0;
+}
+
+.coverup span {
+	font-size: 1.1rem;
+	text-decoration: underline;
+}
+
+.coverup span:hover {
+	cursor: pointer;
+}
+
+/* Login, signup */
+
+.login {
+	position: absolute;
+	left: 0;
+}
+
+.container-main > div > div {
+	margin-top: 2vh;
+	border-radius: 0.3vw;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container-main > div > button,
+.container-main > div > a {
+	margin-top: 2vh;
+}
+
+.input {
+	background-color: var(--box-color-alt);
+	padding: 0.1rem 1vw;
+	border: #777777 2px solid;
+}
+
+.login svg,
+.signup svg {
+	margin-right: 1vw;
+	display: inline-block;
+}
+
+.login input,
+.signup input {
+	border: none;
+	background-color: var(--box-color-alt);
+	outline: none;
+}
+
+.signup {
+	position: absolute;
+	left: 50%;
+}

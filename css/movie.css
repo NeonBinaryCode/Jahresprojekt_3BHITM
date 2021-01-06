@@ -1,0 +1,86 @@
+.container-main {
+	margin-top: 10vh;
+	background: var(--box-color);
+	padding: 3vh 3vw;
+	border-radius: 2vw;
+}
+
+.movie-overview > * {
+	margin-bottom: 3vh;
+}
+
+.movie-poster {
+	width: 80%;
+}
+
+.movie-title {
+	font-size: 2rem;
+	font-family: var(--headings) !important;
+	font-weight: bold;
+	text-align: center;
+}
+
+.general-information {
+	margin: 0.1rem 0;
+}
+
+.general-information td {
+	padding-right: 1vw;
+}
+
+.seat-reservation {
+	display: inline-block;
+}
+
+.seat-reservation .sub-heading {
+	font-family: var(--headings);
+	font-weight: bold;
+	margin: 0 0 1rem !important;
+	padding: 0 0.1vw 2px 0;
+	border-bottom: var(--font-color) 1px solid;
+}
+
+.seat-reservation select {
+	margin-left: 0.5vw;
+	padding: 0.2rem;
+}
+
+.seat-reservation select,
+.seat-reservation option {
+	background-color: var(--background-color);
+	border: var(--font-color) 1px solid;
+}
+
+.seat-reservation a {
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	color: var(--accent-color);
+	border: 1px solid var(--accent-color);
+	border-radius: 5px;
+	padding: 0.375rem 0.75rem;
+	margin-top: 0.8rem;
+}
+
+.seat-reservation a:hover {
+	color: var(--accent-color);
+	background-color: var(--accent-color-rgba);
+	text-decoration: none;
+}
+
+@media only screen and (max-width: 800px) {
+	.movie-overview {
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto auto;
+	}
+
+	.container-main {
+		padding: 3vh 8vw;
+	}
+
+	.movie-poster {
+		justify-self: center;
+	}
+}
