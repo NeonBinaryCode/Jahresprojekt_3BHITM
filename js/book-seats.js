@@ -2,13 +2,15 @@
 
 let states = [];
 const w = 400;
-const h = 400;
+const h = 500;
 const padding = 25;
 const gap = 15;
+const headerHeight = 50;
+const footerHeight = 50;
 const rows = 10;
 const cols = 15;
 const usableWidth = w - padding * 2;
-const usableHeight = h - padding * 2 + gap;
+const usableHeight = h - padding * 2 + gap - headerHeight - footerHeight;
 const seatWidth = usableWidth / cols;
 const seatHeight = usableHeight / rows - gap;
 let count = parseInt($('#select-person-count')[0].value);
@@ -52,8 +54,11 @@ function draw() {
         clearSelectedSeats();
     }
     background(255);
+    drawHeader();
+    drawFooter();
+    rectMode(CORNER);
     for (let i = 0; i < rows; i++) {
-        let y = padding + i * seatHeight + i * gap;
+        let y = padding + i * seatHeight + i * gap + headerHeight;
         for (let j = 0; j < cols; j++) {
             let x = padding + j * seatWidth;
             stroke(0);
@@ -65,6 +70,56 @@ function draw() {
                 line(x + seatWidth - 1, y + 1, x + 1, y + seatHeight - 1);
             }
         }
+    }
+}
+
+function drawHeader() {
+    stroke(0);
+    line(padding, padding, w - padding, padding);
+    textAlign(CENTER);
+    fill(0);
+    text('Leinwand', w / 2, padding + 20);
+}
+
+function drawFooter() {
+    const y = h - padding - footerHeight / 2;
+    rectMode(CENTER);
+    textAlign(CENTER);
+    fill(0);
+    const max = 4;
+    for (let i = 0; i < max; i++) {
+        setFill(i);
+        const l = padding + i * usableWidth / max + usableWidth / max / 4;
+        const t = y - seatHeight / 2;
+        const r = l + seatWidth;
+        const b = t + seatHeight;
+
+        rect((l + seatWidth + r) / 2, y, seatWidth, seatHeight);
+
+        if (i == 3) {
+            stroke(255, 0, 0);
+            line(l + seatWidth / 2 + 1, t + 1, r + seatWidth / 2 - 1, b - 1);
+            line(l + seatWidth / 2 + 1, b - 1, r + seatWidth / 2 - 1, t + 1);
+            stroke(0);
+        }
+
+        fill(0);
+        let txt;
+        switch (i) {
+            case 0:
+                txt = 'frei';
+                break;
+            case 1:
+                txt = 'besetzt';
+                break;
+            case 2:
+                txt = 'gewählt';
+                break;
+            case 3:
+                txt = 'gesperrt';
+                break;
+        }
+        text(txt, (l + seatWidth + r) / 2, y + footerHeight / 2)
     }
 }
 
@@ -144,7 +199,7 @@ function getDiff(row, col) {
 
 function getMouseSeat() {
     for (let i = 0; i < rows; i++) {
-        let y = padding + i * seatHeight + i * gap;
+        let y = padding + i * seatHeight + i * gap + headerHeight;
         if (mouseY >= y && mouseY <= y + seatHeight) {
             for (let j = 0; j < cols; j++) {
                 let x = padding + j * seatWidth;

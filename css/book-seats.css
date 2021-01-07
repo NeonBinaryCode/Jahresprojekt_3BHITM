@@ -16,6 +16,17 @@ label {
 	margin-right: 1vw;
 }
 
+.container-main select {
+	margin-left: 0.5vw;
+	padding: 0.2rem;
+}
+
+.container-main select,
+.container-main option {
+	background-color: var(--background-color);
+	border: var(--font-color) 1px solid;
+}
+
 #container-canvas {
 	margin-top: 5vh;
 }
