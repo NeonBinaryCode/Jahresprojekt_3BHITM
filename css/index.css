@@ -8,7 +8,6 @@
 /* Movie Cards */
 
 .row-movie-cards {
-	height: 41vh;
 }
 
 .movie-card {
@@ -77,13 +76,13 @@
 }
 
 .row-movie-cards .arrow {
-	transform: scale(2.5) translateY(-50%);
+	transform: scale(2.5) translateY(-20%);
 	position: absolute;
 	top: 50%;
 }
 
 .arrow-right {
-	right: 7%;
+	right: 5%;
 }
 
 .arrow-left {
@@ -126,6 +125,6 @@
 	}
 
 	.row-movie-cards .arrow {
-		transform: scale(2) translateY(-50%);
+		transform: scale(2) translateY(-25%);
 	}
 }

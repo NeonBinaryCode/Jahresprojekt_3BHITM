@@ -36,10 +36,17 @@ function fetchData() {
                 </a>`;
             $('#movie-cards')[0].innerHTML += html;
         }
+        resizeImageRow();
     });
 }
 
 fetchData();
+
+function resizeImageRow() {
+    $(".row-movie-cards").height($('.movie-card-1').outerHeight());
+}
+
+window.onresize = resizeImageRow;
 
 leftArrow.click(back);
 rightArrow.click(forward);
