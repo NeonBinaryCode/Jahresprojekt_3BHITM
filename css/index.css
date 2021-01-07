@@ -93,9 +93,9 @@
 @media only screen and (max-width: 900px) {
 	.movie-card-1 {
 		display: grid;
-		width: 50%;
+		width: 65%;
 		position: absolute;
-		left: 25%;
+		left: 17.5%;
 		top: 0;
 		z-index: 2;
 		box-shadow: 5px 0 10px -2px rgba(0, 0, 0, 0.3);
@@ -119,5 +119,13 @@
 	.movie-poster {
 		max-height: 90%;
 		margin: 0 auto;
+	}
+
+	.movie-title {
+		-webkit-line-clamp: none;
+	}
+
+	.row-movie-cards .arrow {
+		transform: scale(2) translateY(-50%);
 	}
 }

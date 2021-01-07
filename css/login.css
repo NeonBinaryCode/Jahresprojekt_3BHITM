@@ -12,7 +12,7 @@
 .signup,
 .coverup {
 	width: 50%;
-	height: 50vh;
+	height: 100%;
 	padding: 3vh 2vw;
 	border-radius: 2vw;
 	display: flex;
@@ -98,6 +98,11 @@
 	background-color: var(--box-color-alt);
 	padding: 0.1rem 1vw;
 	border: #777777 2px solid;
+	width: 70%;
+}
+
+.input input {
+	width: calc(100% - 0.875em - 1vw);
 }
 
 .login svg,
@@ -116,4 +121,22 @@
 .signup {
 	position: absolute;
 	left: 50%;
+}
+
+@media only screen and (max-width: 900px) {
+	.coverup {
+		display: none;
+	}
+
+	.login,
+	.signup {
+		width: 100%;
+		height: 50%;
+		position: static;
+	}
+
+	.container-main {
+		flex-direction: column;
+		height: 100vh;
+	}
 }
