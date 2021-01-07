@@ -3,7 +3,9 @@ $(document).ready(() => {
     setTimeout(() => {
         $('.preload').removeClass('preload');
     }, 500);
-    $("#header").load("../include/header.html", initThemeSwitch);
+    let loggedIn = false;
+    if (!loggedIn) $("#header").load("../include/header.html", initThemeSwitch);
+    else $("#header").load("../include/header-logged-in.html", initThemeSwitch);
     $("#footer").load("../include/footer.html");
 
     let theme = getThemePreference();
