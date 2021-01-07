@@ -93,7 +93,8 @@ body {
 	margin-right: 0.5vw;
 }
 
-.bg-header-footer input {
+.bg-header-footer input,
+.bg-header-footer input:focus {
 	background-color: var(--background-color);
 	border-color: var(--box-color-alt);
 }
@@ -165,7 +166,7 @@ footer h3 {
 }
 
 .newsletter-input #newsletter-email {
-	width: 90%;
+	width: 85%;
 	border: none;
 	border-top-left-radius: 0.5vw;
 	border-bottom-left-radius: 0.5vw;
@@ -173,7 +174,7 @@ footer h3 {
 }
 
 .newsletter-input #newsletter-subscribe {
-	width: 10%;
+	width: 15%;
 	border-top-right-radius: 0.5vw;
 	border-bottom-right-radius: 0.5vw;
 	border: var(--font-color) 0 solid;
