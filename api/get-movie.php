@@ -1,7 +1,7 @@
 <?php
+require 'parse-json.php';
 $id = $_POST['id'];
-$stringContent = file_get_contents('movies.json');
-$jsonContent = json_decode($stringContent, true)['movies'];
+$jsonContent = parseJson('movies.json')['movies'];
 
 foreach ($jsonContent as $movie) {
     if ($movie['id'] == $id) {
