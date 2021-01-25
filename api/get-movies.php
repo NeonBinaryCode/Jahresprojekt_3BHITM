@@ -1,6 +1,7 @@
 <?php
-$stringContent = file_get_contents('movies.json');
-$jsonContent = json_decode($stringContent, true)['movies'];
+require 'parse-json.php';
+require 'file-path.php';
+$jsonContent = parseJson(filePath . "movies.json")['movies'];
 
 $answer = [];
 foreach ($jsonContent as $movie) {
