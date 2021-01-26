@@ -3,13 +3,18 @@ $(document).ready(() => {
     setTimeout(() => {
         $('.preload').removeClass('preload');
     }, 500);
-    let loggedIn = false;
-    if (!loggedIn) $("#header").load("../include/header.html", initThemeSwitch);
-    else $("#header").load("../include/header-logged-in.html", initThemeSwitch);
-    $("#footer").load("../include/footer.html");
+    $('#header').load('../include/header.html', initHeader);
+    $('#footer').load('../include/footer.html', () => {
+        $('#copyright-year').text(new Date().getFullYear());
+    });
 
     let theme = getThemePreference();
     loadTheme();
+
+    function initHeader() {
+        initThemeSwitch();
+        checkCredentials();
+    }
 
     function initThemeSwitch() {
         $('#theme-switch').click(changeTheme);
@@ -19,17 +24,19 @@ $(document).ready(() => {
         let theme = getCookie('theme');
         if (theme != 'light' && theme != 'dark') {
             // Abfrage nach dem System-Design, funktioniert bei mir nicht, aber auf MacOS scheinbar schon
-            if (window
-                .getComputedStyle(document.documentElement)
-                .getPropertyValue('content')
-                .replace(/"/g, '') == 'dark') {
+            if (
+                window
+                    .getComputedStyle(document.documentElement)
+                    .getPropertyValue('content')
+                    .replace(/"/g, '') == 'dark'
+            ) {
                 theme = 'dark';
             } else {
                 theme = 'light';
             }
         }
         return theme;
-    };
+    }
 
     function changeTheme(e) {
         if (theme == 'light') {
@@ -44,21 +51,69 @@ $(document).ready(() => {
         document.documentElement.setAttribute('data-theme', theme);
         setCookie('theme', theme);
     }
+
+    function checkCredentials() {
+        if (getCookie('user') && getCookie('token')) {
+            let data = {
+                username: getCookie('user'),
+                token: getCookie('token'),
+            };
+            $.post('../api/login.php', data, (res) => {
+                console.log(res);
+                res = JSON.parse(res);
+                if (res.status == 'success') {
+                    setCookie('token', res.token, 1);
+                    setCookie('user', getCookie('user'), 1);
+                    loadUser();
+                } else {
+                    deleteCookie('token');
+                    deleteCookie('user');
+                    if (document.location.pathname.endsWith('user/')) {
+                        document.location.href = '../login/';
+                    }
+                }
+            });
+        }
+    }
+
+    function loadUser() {
+        if (getCookie('user')) {
+            $('#dropdown-account')[0].href = '../user/';
+            $('#dropdown-account .text').text('Account');
+
+            if (document.location.pathname.endsWith('login/')) {
+                document.location.href = $('#dropdown-account')[0].href;
+            }
+        }
+    }
 });
 
-function setCookie(cname, cvalue) {
+function setCookie(cname, cvalue, days = 30) {
     let expireDate = new Date();
-    expireDate.setDate(expireDate.getDate() + 30);
+    expireDate.setDate(expireDate.getDate() + days);
     let path = window.location.pathname;
     path = path.split('/');
     path.pop();
     path.pop();
     path = path.join('/');
-    document.cookie = cname + '=' + cvalue + ';SameSite=Lax;expires=' + expireDate.toUTCString() + ';Path=' + path;
+    document.cookie =
+        cname +
+        '=' +
+        cvalue +
+        ';SameSite=Lax;expires=' +
+        expireDate.toUTCString() +
+        ';Path=' +
+        path;
 }
 
 function deleteCookie(cname) {
-    document.cookie = cname + '=;expires=' + new Date().toUTCString();
+    let path = window.location.pathname;
+    path = path.split('/');
+    path.pop();
+    path.pop();
+    path = path.join('/');
+    document.cookie =
+        cname + '=;expires=' + new Date().toUTCString() + ';Path=' + path;
 }
 
 function getCookie(cname) {
@@ -79,7 +134,10 @@ function getCookie(cname) {
 
 function getQuery(qname) {
     let name = qname + '=';
-    let decodedQuery = decodeURIComponent(window.location.search).replace('?', '');
+    let decodedQuery = decodeURIComponent(window.location.search).replace(
+        '?',
+        ''
+    );
     let da = decodedQuery.split('&');
     for (let i = 0; i < da.length; i++) {
         let d = da[i];

@@ -14,7 +14,7 @@ function switchForm() {
 function switchCover() {
     if (++currentCover == 2) currentCover = 0;
     coverup.load(coverFiles[currentCover]);
-};
+}
 
 function signup() {
     let email = $('#email-signup-input').val();
@@ -26,16 +26,35 @@ function signup() {
         let data = { email: email, username: name, password: pwd1 };
         console.log(data);
         $.post('../api/sign-up.php', data, (res) => {
-            console.log(res);
             res = JSON.parse(res);
             if (res.status == 'success') {
+                console.log(res);
                 setCookie('token', res.token);
                 setCookie('user', name);
+                document.location = document.referrer;
             }
-        })
+        });
     }
 }
 
+function login() {
+    let name = $('#username-login-input').val();
+    let pwd = $('#password-login-input').val();
+
+    let data = { username: name, password: pwd };
+    console.log(data);
+    $.post('../api/login.php', data, (res) => {
+        res = JSON.parse(res);
+        if (res.status == 'success') {
+            console.log(res);
+            setCookie('token', res.token);
+            setCookie('user', name);
+            document.location = document.referrer;
+        }
+    });
+}
+
 $('#signup-button').click(signup);
+$('#login-button').click(login);
 
 switchCover();

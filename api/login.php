@@ -5,8 +5,8 @@ require 'file-path.php';
 $fn = filePath . 'users.json';
 
 $username = isset($_POST['username']) ? $_POST['username'] : $_POST['email'];
-$pwd = $_POST['password'];
-$md5 = md5($username . $pwd);
+$pwd = isset($_POST['password']) ? $_POST['password'] : false;
+$md5 = $pwd != false ? md5($username . $pwd) : $_POST['token'];
 
 $jsonContent = parseJson($fn);
 

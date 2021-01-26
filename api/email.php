@@ -8,4 +8,3 @@ $header = array(
 );
 
 mail($empfaenger, $betreff, $nachricht);
-?>

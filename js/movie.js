@@ -28,10 +28,13 @@
 
     fetchData();
 
-    selectDate.addEventListener('change', () => {
-    });
+    selectDate.addEventListener('change', () => {});
 
     function updateLink() {
-        $('#start-reservation')[0].href = `../book-seats/?id=${id}&date=${encodeURIComponent(selectDate.value.replace(' ', '_'))}`;
+        $(
+            '#start-reservation'
+        )[0].href = `../book-seats/?id=${id}&date=${encodeURIComponent(
+            selectDate.value.replace(' ', '_')
+        )}`;
     }
 })();
