@@ -1,6 +1,7 @@
 <?php
 require 'parse-json.php';
 require 'file-path.php';
+require 'regex.php';
 
 $fn = filePath . 'users.json';
 
@@ -19,7 +20,7 @@ foreach ($jsonContent['users'] as $user) {
     }
 }
 
-if (!$exists) {
+if (!$exists && preg_match(usernameRegex, $username) && preg_match(passwordRegex, $pwd) && preg_match(emailRegex, $email)) {
     $jsonContent['users'][] = ['password' => $pwd, 'name' => $username, 'email' => $email];
 
     file_put_contents($fn, json_encode($jsonContent));

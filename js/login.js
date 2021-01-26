@@ -2,6 +2,10 @@ let loginDiv = $('.login');
 let signupDiv = $('.signup');
 let coverup = $('.coverup');
 
+const usernameRegex = /^[A-Za-z0-9 .]{3,30}$/;
+const passwordRegex = /^[^\s;{}[\]]{8,30}$/;
+const emailRegex = /^(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+
 const coverFiles = ['./cover-login.html', './cover-signup.html'];
 let currentCover = 1;
 
@@ -22,10 +26,16 @@ function signup() {
     let pwd1 = $('#password-signup-input').val();
     let pwd2 = $('#password-verify-signup-input').val();
 
-    if (pwd1 == pwd2 && pwd1.length > 3 && name.length > 3) {
+    if (
+        pwd1 == pwd2 &&
+        passwordRegex.test(pwd1) &&
+        usernameRegex.test(name) &&
+        emailRegex.test(email)
+    ) {
         let data = { email: email, username: name, password: pwd1 };
         console.log(data);
         $.post('../api/sign-up.php', data, (res) => {
+            console.log(res);
             res = JSON.parse(res);
             if (res.status == 'success') {
                 console.log(res);
@@ -34,6 +44,13 @@ function signup() {
                 document.location = document.referrer;
             }
         });
+    } else {
+        console.log(
+            'Data invalid',
+            passwordRegex.test(pwd1),
+            usernameRegex.test(name),
+            emailRegex.test(email)
+        );
     }
 }
 

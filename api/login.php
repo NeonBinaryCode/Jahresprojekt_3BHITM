@@ -1,6 +1,7 @@
 <?php
 require 'parse-json.php';
 require 'file-path.php';
+require 'regex.php';
 
 $fn = filePath . 'users.json';
 
