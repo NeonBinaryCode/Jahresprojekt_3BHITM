@@ -202,14 +202,24 @@ function bookSeats() {
         }
     }
     if (seatCount == count) {
-        // send data to serverv
+        let data = {
+            id: getQuery('id'),
+            date: decodeURIComponent(getQuery('date')).replace('_', ' '),
+            seats: states,
+        };
+        $.post('../api/submit-seating.php', data, (res) => {
+            res = JSON.parse(res);
+            if (res.status == 'success') {
+                document.location = document.referrer;
+            }
+        });
     }
 }
 
 async function loadData() {
     let data = {
         id: getQuery('id'),
-        date: '12/03/2021, 18:00', ///decodeURIComponent(getQuery('date')).replace('_', ' '),
+        date: decodeURIComponent(getQuery('date')).replace('_', ' '),
     };
     $.post('../api/get-seating.php', data, (res) => {
         console.log(JSON.parse(res));
@@ -217,6 +227,7 @@ async function loadData() {
         // Lücken zwischen Sitzplätzen um Corona-konform zu sein, später am Server
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
+                states[i][j] = Number(states[i][j]);
                 if (
                     (states[i][j - 1] == 1 || states[i][j + 1] == 1) &&
                     states[i][j] != 1
