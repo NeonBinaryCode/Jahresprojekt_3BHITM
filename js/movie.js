@@ -8,10 +8,9 @@
             $('.movie-title').text(data.title);
             $('.movie-description').text(data.description);
             id = data.id;
-            updateLink();
             let informationHtml = '';
-            for (const key in data.information) {
-                const val = data.information[key];
+            for (let key in data.information) {
+                let val = data.information[key];
                 if (typeof val == 'object') {
                     for (let i = 0; i < val.length; i++) {
                         informationHtml += '<tr><td>';
@@ -23,12 +22,41 @@
                 }
             }
             $('.general-information').html(informationHtml);
+
+            $('#select-date')[0].innerHTML = '';
+            for (let showing of data.showings) {
+                let date = showing.date;
+                $(
+                    '#select-date'
+                )[0].innerHTML += `<option value="${date}">${date}</option>`;
+            }
+            updateLink();
+
+            let averageRating = 0;
+            for (let rating of data.ratings) {
+                averageRating += Number(rating.rating);
+            }
+            averageRating /= data.ratings.length;
+            averageRating = Math.round(averageRating);
+            let stars = [
+                '<i class="fas fa-star"></i>',
+                '<i class="far fa-star"></i>',
+            ];
+            let ratingElem = $('.star-rating')[0];
+            ratingElem.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < averageRating) {
+                    ratingElem.innerHTML += stars[0];
+                } else {
+                    ratingElem.innerHTML += stars[1];
+                }
+            }
         });
     }
 
     fetchData();
 
-    selectDate.addEventListener('change', () => {});
+    selectDate.addEventListener('change', updateLink);
 
     function updateLink() {
         $(
