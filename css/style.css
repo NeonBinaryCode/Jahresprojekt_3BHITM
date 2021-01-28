@@ -36,6 +36,10 @@ body {
     transition: none !important;
 }
 
+.hidden {
+    display: none !important;
+}
+
 #header,
 #footer,
 .container-main {
@@ -114,6 +118,10 @@ h3 {
 h1 {
     margin: 3vh 0 1.5vh;
     text-align: center;
+}
+
+h1 span {
+    font-family: var(--headings) !important;
 }
 
 h2 {

@@ -59,7 +59,6 @@ $(document).ready(() => {
                 token: getCookie('token'),
             };
             $.post('../api/login.php', data, (res) => {
-                console.log(res);
                 res = JSON.parse(res);
                 if (res.status == 'success') {
                     setCookie('token', res.token, 1);

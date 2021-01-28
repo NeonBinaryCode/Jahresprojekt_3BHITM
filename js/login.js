@@ -59,7 +59,6 @@ function login() {
     let pwd = $('#password-login-input').val();
 
     let data = { username: name, password: pwd };
-    console.log(data);
     $.post('../api/login.php', data, (res) => {
         res = JSON.parse(res);
         if (res.status == 'success') {

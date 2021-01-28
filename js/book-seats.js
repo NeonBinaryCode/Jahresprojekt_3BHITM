@@ -15,36 +15,12 @@ const seatWidth = usableWidth / cols;
 const seatHeight = usableHeight / rows - gap;
 let count = parseInt($('#select-person-count')[0].value);
 
-for (let i = 0; i < rows; i++) {
-    states[i] = [];
-    for (let j = 0; j < cols; j++) {
-        states[i][j] = 0;
-    }
-}
-
-states[2][2] = 1;
-states[2][3] = 1;
-
-states[2][13] = 1;
-states[2][14] = 1;
-
-states[5][6] = 1;
-states[5][7] = 1;
-states[5][8] = 1;
-states[5][9] = 1;
+loadData();
 
 function setup() {
     let canvas = createCanvas(w, h);
     $('#container-canvas').html('');
     canvas.parent('container-canvas');
-
-    // Lücken zwischen Sitzplätzen um Corona-konform zu sein, später am Server
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            if ((states[i][j - 1] == 1 || states[i][j + 1] == 1) && states[i][j] != 1)
-                states[i][j] = 3;
-        }
-    }
 }
 
 function draw() {
@@ -54,20 +30,22 @@ function draw() {
         clearSelectedSeats();
     }
     background(255);
-    drawHeader();
-    drawFooter();
-    rectMode(CORNER);
-    for (let i = 0; i < rows; i++) {
-        let y = padding + i * seatHeight + i * gap + headerHeight;
-        for (let j = 0; j < cols; j++) {
-            let x = padding + j * seatWidth;
-            stroke(0);
-            setFill(states[i][j])
-            rect(x, y, seatWidth, seatHeight);
-            if (states[i][j] == 3) {
-                stroke(255, 0, 0);
-                line(x + 1, y + 1, x + seatWidth - 1, y + seatHeight - 1);
-                line(x + seatWidth - 1, y + 1, x + 1, y + seatHeight - 1);
+    if (states.length > 0) {
+        drawHeader();
+        drawFooter();
+        rectMode(CORNER);
+        for (let i = 0; i < rows; i++) {
+            let y = padding + i * seatHeight + i * gap + headerHeight;
+            for (let j = 0; j < cols; j++) {
+                let x = padding + j * seatWidth;
+                stroke(0);
+                setFill(states[i][j]);
+                rect(x, y, seatWidth, seatHeight);
+                if (states[i][j] == 3) {
+                    stroke(255, 0, 0);
+                    line(x + 1, y + 1, x + seatWidth - 1, y + seatHeight - 1);
+                    line(x + seatWidth - 1, y + 1, x + 1, y + seatHeight - 1);
+                }
             }
         }
     }
@@ -89,7 +67,7 @@ function drawFooter() {
     const max = 4;
     for (let i = 0; i < max; i++) {
         setFill(i);
-        const l = padding + i * usableWidth / max + usableWidth / max / 4;
+        const l = padding + (i * usableWidth) / max + usableWidth / max / 4;
         const t = y - seatHeight / 2;
         const r = l + seatWidth;
         const b = t + seatHeight;
@@ -119,7 +97,7 @@ function drawFooter() {
                 txt = 'gesperrt';
                 break;
         }
-        text(txt, (l + seatWidth + r) / 2, y + footerHeight / 2)
+        text(txt, (l + seatWidth + r) / 2, y + footerHeight / 2);
     }
 }
 
@@ -213,3 +191,40 @@ function getMouseSeat() {
     return false;
 }
 // })();
+
+function bookSeats() {
+    let seatCount = 0;
+    for (let row of states) {
+        for (let seat of row) {
+            if (seat == 2) {
+                seatCount++;
+            }
+        }
+    }
+    if (seatCount == count) {
+        // send data to serverv
+    }
+}
+
+async function loadData() {
+    let data = {
+        id: getQuery('id'),
+        date: '12/03/2021, 18:00', ///decodeURIComponent(getQuery('date')).replace('_', ' '),
+    };
+    $.post('../api/get-seating.php', data, (res) => {
+        console.log(JSON.parse(res));
+        states = JSON.parse(res).seats;
+        // Lücken zwischen Sitzplätzen um Corona-konform zu sein, später am Server
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                if (
+                    (states[i][j - 1] == 1 || states[i][j + 1] == 1) &&
+                    states[i][j] != 1
+                )
+                    states[i][j] = 3;
+            }
+        }
+    });
+}
+
+$('.btn-book').click(bookSeats);

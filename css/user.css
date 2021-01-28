@@ -1,0 +1,66 @@
+.container-main {
+    margin: 15vh auto 0;
+    width: 50%;
+    display: inline-block;
+    background: var(--box-color);
+    padding: 3vh 10vw;
+    border-radius: 2vw;
+}
+
+.container-main h1 {
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+.container-main button {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.2rem;
+    background: none;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--accent-color);
+}
+
+.container-main button:hover {
+    background: var(--accent-color-rgba);
+}
+
+.container-main #logout-button {
+    border: 1px solid red;
+}
+
+.container-main #logout-button:hover {
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.container-main button svg {
+    margin-right: 0.5vw;
+}
+
+.account-data {
+    width: 100%;
+}
+
+.account-data .row {
+    margin-bottom: 2vh;
+}
+
+.account-data > div > * {
+    display: inline-block;
+    margin: 0 !important;
+}
+
+.account-data .label {
+    font-weight: bold;
+}
+
+.account-data input {
+    background: var(--background-color);
+    border: var(--font-color) 1px solid;
+}
+
+@media only screen and (max-width: 700px) {
+    .container-main {
+        width: 90%;
+    }
+}

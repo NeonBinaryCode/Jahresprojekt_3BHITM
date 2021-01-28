@@ -1,38 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="../js/script.js"></script>
+        <script src="../js/user.js" defer></script>
+        <script
+            src="https://kit.fontawesome.com/f56e47a7d2.js"
+            crossorigin="anonymous"
+        ></script>
 
-    <!-- JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
-    <script src="../js/script.js"></script>
-    <script src="../js/user.js" defer></script>
-    <script src="https://kit.fontawesome.com/f56e47a7d2.js" crossorigin="anonymous"></script>
+        <!-- CSS -->
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/user.css" />
 
-    <!-- CSS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/user.css">
+        <title>Lensscape Filmfestival</title>
+    </head>
 
-    <title>Lensscape Filmfestival</title>
-</head>
-
-<body class="preload">
-    <div id="header"></div>
-    <div class="container container-main">
-        <h1>Eingeloggt als <span id="username-placeholder"></span></h1>
-        <button id="logout-button">Abmelden</button>
-    </div>
-    <div class="full-height"></div>
-    <div id="footer"></div>
-</body>
-
+    <body class="preload">
+        <div id="header"></div>
+        <div class="container container-main">
+            <h1>Eingeloggt als <span id="username-placeholder"></span></h1>
+            <div class="account-data">
+                <div class="email row">
+                    <p class="label col-lg-4 col-sm-12">E-Mail:</p>
+                    <p class="data col-lg-4 col-sm-12"></p>
+                    <input
+                        class="input hidden col-lg-4 col-sm-12"
+                        type="text"
+                    />
+                    <button class="change-email col-lg-4 col-sm-12">
+                        Ändern
+                    </button>
+                </div>
+                <div class="name row">
+                    <p class="label col-lg-4 col-sm-12">Accountname:</p>
+                    <p class="data col-lg-4 col-sm-12"></p>
+                    <input
+                        class="input hidden col-lg-4 col-sm-12"
+                        type="text"
+                    />
+                    <button class="change-name col-lg-4 col-sm-12">
+                        Ändern
+                    </button>
+                </div>
+                <div class="password row">
+                    <p class="label col-lg-4 col-sm-12">Passwort:</p>
+                    <a href="#passwortvergessen" class="col-lg-4 col-sm-12"
+                        >Passwort ändern</a
+                    >
+                </div>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="reserved-seats hidden">
+                <div class="data"></div>
+                <div class="vertical-line"></div>
+            </div>
+            <button id="logout-button">
+                <i class="fas fa-sign-out-alt"></i>Abmelden
+            </button>
+        </div>
+        <div class="full-height"></div>
+        <div id="footer"></div>
+    </body>
 </html>

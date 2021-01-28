@@ -1,0 +1,70 @@
+.no-result {
+    text-align: center;
+    margin-top: 10vh;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.movie-card {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-areas: 'poster title' 'poster description';
+    background-color: var(--background-color);
+    padding: 2vh 2vw;
+    border: 1px solid var(--box-color);
+    border-radius: 2vh;
+    color: var(--font-color);
+    width: 80%;
+    margin: 5vh auto 0;
+}
+
+.movie-poster {
+    display: flex;
+    grid-area: poster;
+    max-width: 90%;
+    max-height: 260px;
+    align-self: center;
+}
+
+.movie-title {
+    grid-area: title;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: clip;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.movie-description {
+    grid-area: description;
+    overflow: hidden;
+    text-overflow: clip;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+}
+
+@media only screen and (max-width: 900px) {
+    .movie-card {
+        height: 100%;
+        grid-template-columns: auto;
+        grid-template-areas: 'poster' 'title';
+        text-align: center;
+    }
+
+    .movie-description {
+        display: none;
+    }
+
+    .movie-poster {
+        max-height: 90%;
+        margin: 0 auto;
+    }
+
+    .movie-title {
+        -webkit-line-clamp: none;
+    }
+}
