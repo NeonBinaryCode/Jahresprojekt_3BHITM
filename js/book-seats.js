@@ -219,9 +219,8 @@ function bookSeats() {
 async function loadData() {
     let data = {
         id: getQuery('id'),
-        date: decodeURIComponent(getQuery('date')).replace('_', ' '),
     };
-    $.post('../api/get-seating.php', data, (res) => {
+    $.post('../api/get-seating-new.php', data, (res) => {
         console.log(JSON.parse(res));
         states = JSON.parse(res).seats;
         // Lücken zwischen Sitzplätzen um Corona-konform zu sein, später am Server

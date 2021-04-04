@@ -2,8 +2,10 @@
     let id = -1;
     let selectDate = $('#select-date')[0];
     function fetchData() {
-        $.post('../api/get-movie.php', { id: getQuery('id') }, (data) => {
+        $.post('../api/get-movie-new.php', { id: getQuery('id') }, (data) => {
             data = JSON.parse(data);
+            data.information = JSON.parse(data.information);
+            console.log(data);
             $('.movie-poster')[0].src = `../media/${data.poster}`;
             $('.movie-title').text(data.title);
             $('.movie-description').text(data.description);
@@ -28,7 +30,7 @@
                 let date = showing.date;
                 $(
                     '#select-date'
-                )[0].innerHTML += `<option value="${date}">${date}</option>`;
+                )[0].innerHTML += `<option value="${showing.id}">${date}</option>`;
             }
             updateLink();
 
@@ -61,8 +63,6 @@
     function updateLink() {
         $(
             '#start-reservation'
-        )[0].href = `../book-seats/?id=${id}&date=${encodeURIComponent(
-            selectDate.value.replace(' ', '_')
-        )}`;
+        )[0].href = `../book-seats/?id=${selectDate.value}`;
     }
 })();

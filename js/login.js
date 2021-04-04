@@ -32,16 +32,21 @@ function signup() {
         usernameRegex.test(name) &&
         emailRegex.test(email)
     ) {
-        let data = { email: email, username: name, password: pwd1 };
+        let data = {
+            email: email,
+            username: name,
+            password: pwd1,
+            password2: pwd2,
+        };
         console.log(data);
-        $.post('../api/sign-up.php', data, (res) => {
+        $.post('../api/sign-up-new.php', data, (res) => {
             console.log(res);
             res = JSON.parse(res);
             if (res.status == 'success') {
                 console.log(res);
-                setCookie('token', res.token);
-                setCookie('user', name);
-                document.location = document.referrer;
+                // setCookie('token', res.token);
+                // setCookie('user', name);
+                location.reload();
             }
         });
     } else {
@@ -59,12 +64,12 @@ function login() {
     let pwd = $('#password-login-input').val();
 
     let data = { username: name, password: pwd };
-    $.post('../api/login.php', data, (res) => {
+    $.post('../api/login-new.php', data, (res) => {
         res = JSON.parse(res);
+        console.log(res);
         if (res.status == 'success') {
-            console.log(res);
-            setCookie('token', res.token);
-            setCookie('user', name);
+            // setCookie('token', res.token);
+            // setCookie('user', name);
             document.location = document.referrer;
         }
     });

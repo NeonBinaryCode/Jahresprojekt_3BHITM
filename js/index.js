@@ -24,7 +24,7 @@ function back() {
 }
 
 function fetchData() {
-    $.post('../api/get-movies.php', (data) => {
+    $.post('../api/get-movies-new.php', (data) => {
         data = JSON.parse(data);
         let currentCount = 1;
 
