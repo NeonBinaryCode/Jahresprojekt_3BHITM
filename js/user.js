@@ -20,9 +20,11 @@ function fetchUserData() {
 }
 
 function logout() {
-    deleteCookie('user');
-    deleteCookie('token');
-    window.location.href = '../login/';
+    $.post('../api/reset-session.php', {}, (res) => console.log(res));
+    deleteCookie('loggedOn');
+    setTimeout(() => {
+        window.location.href = '../login/';
+    }, 10);
 }
 
 function loadInput(e) {

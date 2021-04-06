@@ -38,7 +38,7 @@ $(document).ready(() => {
         return theme;
     }
 
-    function changeTheme(e) {
+    function changeTheme() {
         if (theme == 'light') {
             theme = 'dark';
         } else {
