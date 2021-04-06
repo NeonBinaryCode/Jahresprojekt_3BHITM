@@ -31,7 +31,19 @@ if (isset($_SESSION['user']['id'])) {
             }
         }
         if ($valid) {
+            if ($row < 0 || $row > count($arr)) {
+                $answer = ['status' => 'fail', 'message' => 'Invalid row'];
+                $connection->close();
+                echo json_encode($answer);
+                exit;
+            }
             foreach ($cols as $col) {
+                if ($col < 0 || $col > count($arr[$row])) {
+                    $answer = ['status' => 'fail', 'message' => 'Invalid columns'];
+                    $connection->close();
+                    echo json_encode($answer);
+                    exit;
+                }
                 $arr[$row][$col] = 1;
             }
             $arr = json_encode($arr);
@@ -55,4 +67,5 @@ if (isset($_SESSION['user']['id'])) {
     $answer = ['status' => 'fail', 'message' => 'Not logged in'];
 }
 
+$connection->close();
 echo json_encode($answer);
