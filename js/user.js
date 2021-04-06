@@ -1,18 +1,18 @@
-if (!getCookie('user')) {
-    window.location.href = '../login/';
-} else {
-    $('#username-placeholder').text(getCookie('user'));
+$.post('../api/get-user.php', {}, (res) => {
+    if (res.length == 0) {
+        // window.location.href = '../login/';
+    }
 
+    $('#username-placeholder').text(res);
     $('#logout-button').click(logout);
-}
+});
 
 function fetchUserData() {
-    let data = { username: getCookie('user'), token: getCookie('token') };
-    $.post('../api/user-data.php', data, (res) => {
+    $.post('../api/user-data-new.php', {}, (res) => {
         res = JSON.parse(res);
         if (res.status == 'success') {
             $('.email .data').text(res.email);
-            $('.name .data').text(getCookie('user'));
+            $('.name .data').text(res.username);
         } else {
             logout();
         }

@@ -1,5 +1,5 @@
 function fetchData() {
-    $.post('../api/get-movies.php', { query: getQuery('q') }, (data) => {
+    $.post('../api/get-movies-new.php', { query: getQuery('q') }, (data) => {
         data = JSON.parse(data);
 
         for (let movie of data) {

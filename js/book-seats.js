@@ -14,6 +14,8 @@ const usableHeight = h - padding * 2 + gap - headerHeight - footerHeight;
 const seatWidth = usableWidth / cols;
 const seatHeight = usableHeight / rows - gap;
 let count = parseInt($('#select-person-count')[0].value);
+let selectedRow = -1;
+let selectedCols = -1;
 
 loadData();
 
@@ -124,7 +126,9 @@ function mousePressed() {
     const seat = getMouseSeat();
     if (seat) {
         let row = seat[0];
+        selectedRow = row;
         let col = seat[1];
+        selectedCols = [];
 
         if (states[row][col] != 1) {
             let diff = getDiff(row, col);
@@ -132,6 +136,7 @@ function mousePressed() {
                 clearSelectedSeats();
                 for (let i = 0; i < count; i++) {
                     states[row][col - diff + i] = 2;
+                    selectedCols.push(col - diff + i);
                 }
             }
         }
@@ -204,10 +209,11 @@ function bookSeats() {
     if (seatCount == count) {
         let data = {
             id: getQuery('id'),
-            date: decodeURIComponent(getQuery('date')).replace('_', ' '),
-            seats: states,
+            row: selectedRow,
+            cols: selectedCols,
         };
-        $.post('../api/submit-seating.php', data, (res) => {
+        $.post('../api/submit-seating-new.php', data, (res) => {
+            console.log(res);
             res = JSON.parse(res);
             if (res.status == 'success') {
                 document.location = document.referrer;

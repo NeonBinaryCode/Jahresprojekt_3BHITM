@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'parse-json.php';
 require 'file-path.php';
 $id = $_POST['id'];
