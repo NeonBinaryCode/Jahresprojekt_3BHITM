@@ -13,6 +13,17 @@ function fetchUserData() {
         if (res.status == 'success') {
             $('.email .data').text(res.email);
             $('.name .data').text(res.username);
+            if ((res.reservations.length ?? 0) > 0) {
+                $('.reserved-seats').removeClass('hidden');
+                for (let reservation of res.reservations) {
+                    let str = `<p class="reservation">${
+                        reservation.date
+                    }, Reihe ${reservation.row}, Plätze ${Math.min(
+                        ...reservation.cols
+                    )}-${Math.max(...reservation.cols)}</p>`;
+                    $('.reserved-seats .data')[0].innerHTML += str;
+                }
+            }
         } else {
             logout();
         }
