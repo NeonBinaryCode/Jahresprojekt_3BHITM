@@ -1,72 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="../js/script.js"></script>
+        <script src="../js/login.js" defer></script>
+        <script
+            src="https://kit.fontawesome.com/f56e47a7d2.js"
+            crossorigin="anonymous"
+        ></script>
 
-    <!-- JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
-    <script src="../js/script.js"></script>
-    <script src="../js/login.js" defer></script>
-    <script src="https://kit.fontawesome.com/f56e47a7d2.js" crossorigin="anonymous"></script>
+        <!-- CSS -->
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/login.css" />
 
-    <!-- CSS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/login.css">
+        <title>Lensscape Filmfestival</title>
+    </head>
 
-    <title>Lensscape Filmfestival</title>
-</head>
-
-<body class="preload">
-    <div id="header"></div>
-    <div class="container container-main">
-        <div class="login">
-            <p class="title">Anmeldung</p>
-            <div class="username input">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Benutzername" id="username-login-input">
+    <body class="preload">
+        <div id="header"></div>
+        <div class="container container-main">
+            <div class="login">
+                <p class="title">Anmeldung</p>
+                <div class="username input">
+                    <i class="fas fa-user"></i>
+                    <input
+                        type="text"
+                        placeholder="Benutzername"
+                        id="username-login-input"
+                    />
+                </div>
+                <div class="password input">
+                    <i class="fas fa-unlock-alt"></i>
+                    <input
+                        type="password"
+                        placeholder="Passwort"
+                        id="password-login-input"
+                    />
+                </div>
+                <div class="output">
+                    <p></p>
+                </div>
+                <button id="login-button">Anmelden</button>
+                <a href="#passwortvergessen">Passwort vergessen</a>
             </div>
-            <div class="password input">
-                <i class="fas fa-unlock-alt"></i>
-                <input type="password" placeholder="Passwort" id="password-login-input">
+            <div class="signup">
+                <p class="title">Account erstellen</p>
+                <div class="email input">
+                    <i class="fas fa-envelope"></i>
+                    <input
+                        type="text"
+                        placeholder="E-Mail"
+                        id="email-signup-input"
+                    />
+                </div>
+                <div class="username input">
+                    <i class="fas fa-user"></i>
+                    <input
+                        type="text"
+                        placeholder="Benutzername"
+                        id="username-signup-input"
+                    />
+                </div>
+                <div class="password input">
+                    <i class="fas fa-unlock-alt"></i>
+                    <input
+                        type="password"
+                        placeholder="Passwort"
+                        id="password-signup-input"
+                    />
+                </div>
+                <div class="password-verify input">
+                    <i class="fas fa-unlock-alt"></i>
+                    <input
+                        type="password"
+                        placeholder="Passwort bestätigen"
+                        id="password-verify-signup-input"
+                    />
+                </div>
+                <div class="buttonbar">
+                    <button id="signup-button">Registrieren</button>
+                </div>
             </div>
-            <button id="login-button">Anmelden</button>
-            <a href="#passwortvergessen">Passwort vergessen</a>
+            <div class="coverup right"></div>
         </div>
-        <div class="signup">
-            <p class="title">Account erstellen</p>
-            <div class="email input">
-                <i class="fas fa-envelope"></i>
-                <input type="text" placeholder="E-Mail" id="email-signup-input">
-            </div>
-            <div class="username input">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Benutzername" id="username-signup-input">
-            </div>
-            <div class="password input">
-                <i class="fas fa-unlock-alt"></i>
-                <input type="password" placeholder="Passwort" id="password-signup-input">
-            </div>
-            <div class="password-verify input">
-                <i class="fas fa-unlock-alt"></i>
-                <input type="password" placeholder="Passwort bestätigen" id="password-verify-signup-input">
-            </div>
-            <div class="buttonbar">
-                <button id="signup-button">Registrieren</button>
-            </div>
-        </div>
-        <div class="coverup right"></div>
-    </div>
-    <div class="full-height"></div>
-    <div id="footer"></div>
-</body>
-
+        <div class="full-height"></div>
+        <div id="footer"></div>
+    </body>
 </html>
