@@ -22,7 +22,7 @@ if (strlen($username) == 0 && preg_match(emailRegex, $email)) {
     $sql = "SELECT `username` FROM lensscape.user WHERE email='$email' AND user_deleted = 0 LIMIT 1";
     if ($res = $connection->query($sql)) {
         if ($res->num_rows > 0) {
-            $username = $res->fetch_assoc();
+            $username = $res->fetch_assoc()['username'];
         } else {
             $answer = ['status' => 'fail', 'message' => 'Falsche E-Mail Adresse'];
         }

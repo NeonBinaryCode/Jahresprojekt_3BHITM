@@ -75,8 +75,14 @@ function login() {
     let name = $('#username-login-input').val();
     let pwd = $('#password-login-input').val();
 
-    let data = { username: name, password: pwd };
+    let data;
+    if (emailRegex.test(name)) {
+        data = { email: name, password: pwd };
+    } else {
+        data = { username: name, password: pwd };
+    }
     $.post('../api/login-new.php', data, (res) => {
+        console.log(res);
         res = JSON.parse(res);
         if (res.status == 'success') {
             document.location = document.referrer;
