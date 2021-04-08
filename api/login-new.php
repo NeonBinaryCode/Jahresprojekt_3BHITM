@@ -47,10 +47,6 @@ if ($res = $connection->query($sql)) {
     $res->close();
 }
 
-if (($_SESSION['login'] ?? 0) != 1) {
-    include('login.html');
-    exit;
-}
 $connection->close();
 
 echo json_encode($answer);
