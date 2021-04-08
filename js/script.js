@@ -56,7 +56,6 @@ $(document).ready(() => {
         $.post('../api/get-user.php', {}, (res) => {
             if (res.length > 0) {
                 setCookie('loggedOn', true, 1);
-                loadUser();
             } else if (document.location.pathname.endsWith('user/')) {
                 setCookie('loggedOn', false, 1);
                 document.location.href = '../login/';
@@ -64,29 +63,6 @@ $(document).ready(() => {
             loadUser();
         });
     }
-
-    // function checkCredentials() {
-    //     if (getCookie('user') && getCookie('token')) {
-    //         let data = {
-    //             username: getCookie('user'),
-    //             token: getCookie('token'),
-    //         };
-    //         $.post('../api/login.php', data, (res) => {
-    //             res = JSON.parse(res);
-    //             if (res.status == 'success') {
-    //                 setCookie('token', res.token, 1);
-    //                 setCookie('user', getCookie('user'), 1);
-    //                 loadUser();
-    //             } else {
-    //                 deleteCookie('token');
-    //                 deleteCookie('user');
-    //                 if (document.location.pathname.endsWith('user/')) {
-    //                     document.location.href = '../login/';
-    //                 }
-    //             }
-    //         });
-    //     }
-    // }
 
     function loadUser() {
         if (getCookie('loggedOn')) {
