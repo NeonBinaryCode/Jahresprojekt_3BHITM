@@ -56,6 +56,18 @@ function signup() {
             usernameRegex.test(name),
             emailRegex.test(email)
         );
+        if (!passwordRegex.test(pwd1)) {
+            $('.password.input').addClass('invalid');
+        }
+        if (!passwordRegex.test(pwd2)) {
+            $('.password-verify.input').addClass('invalid');
+        }
+        if (!usernameRegex.test(name)) {
+            $('.username.input').addClass('invalid');
+        }
+        if (!emailRegex.test(email)) {
+            $('.email.input').addClass('invalid');
+        }
     }
 }
 
@@ -66,12 +78,20 @@ function login() {
     let data = { username: name, password: pwd };
     $.post('../api/login-new.php', data, (res) => {
         res = JSON.parse(res);
-        console.log(res);
         if (res.status == 'success') {
-            // setCookie('token', res.token);
-            // setCookie('user', name);
             document.location = document.referrer;
+        } else {
+            $('.output p').text(res.message);
+            setTimeout(() => {
+                $('.output p').text('');
+            }, 5000);
         }
+    });
+}
+
+for (let input of $('.input')) {
+    input.getElementsByTagName('input')[0].addEventListener('input', () => {
+        input.classList.remove('invalid');
     });
 }
 
