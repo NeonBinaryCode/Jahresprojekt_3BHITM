@@ -1,5 +1,22 @@
 # Jahresprojekt 3BHITM - Lensscape Filmfestival
 
+## v0.3 - Zwischenabgabe 3
+
+-   Änderung von Accountdaten
+-   Eingabeüberprüfung beim Speichern der Sitzauswahl
+-   Anzeigen der Reservierungen auf der Account-Seite
+-   Anzeigen der einzelnen Bewertungen auf der Filmseite
+-   Erstellen einer neuen Bewertung, wennman angemeldet ist
+-   Eingabeüberprüfung von Formularen auf dem Server (mittels Regex und MySQL real_escape_string )
+-   Speichern von Daten in Datenbank statt JSON-Files
+
+### TODO
+
+Nicht geschafft aufgrund von Zeitmangel:
+
+-   Gestaltung eine Logos
+-   Rückmeldung nach Sitzplatzreservierung
+
 ## v0.2 - Semesterabgabe
 
 -   Speichern von Accountdaten am Server
@@ -8,17 +25,6 @@
 -   Accountübersicht auf einer Seite
 -   Suchfunktion mit der man einzelne Filme suchen kann
 -   Anpassungen am HTML und CSS
-
-### TODO
-
-Nicht geschafft aufgrund von Zeitmangel:
-
--   Änderung von Accountdaten
--   Anzeigen der einzelnen Bewertungen auf der Filmseite
--   Eingabeüberprüfung beim Speichern der Sitzauswahl
--   Gestaltung eine Logos
--   Rückmeldung nach Sitzplatzreservierung
--   Anzeigen der Reservierungen auf der Account-Seite
 
 ## v0.1 - Zwischenabgabe 1
 
