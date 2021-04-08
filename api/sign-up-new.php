@@ -47,7 +47,7 @@ if (count($errors) == 0) {
     if ($res = $connection->query($sql)) {
         $answer = ['message' => 'Account erstellt', 'status' => 'success'];
     } else {
-        $answer = ['status' => 'fail', 'message' => 'Name oder E-Mail existiert bereits', 'sql' => $sql];
+        $answer = ['status' => 'fail', 'message' => 'Name oder E-Mail existiert bereits'];
     }
 
     $connection->close();

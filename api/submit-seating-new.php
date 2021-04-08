@@ -54,10 +54,10 @@ if (isset($_SESSION['user']['id'])) {
                 if ($res2 = $connection->query($sql)) {
                     $answer = ['status' => 'success', 'message' => 'Reserved seats'];
                 } else {
-                    $answer = ['status' => 'fail', 'message' => 'Invalid values', 'sql' => $sql, 'res' => $res2];
+                    $answer = ['status' => 'fail', 'message' => 'Invalid values'];
                 }
             } else {
-                $answer = ['status' => 'fail', 'message' => 'Invalid values', 'sql' => $sql];
+                $answer = ['status' => 'fail', 'message' => 'Invalid values'];
             }
         }
     } else {
