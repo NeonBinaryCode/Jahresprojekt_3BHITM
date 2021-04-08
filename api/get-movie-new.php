@@ -31,12 +31,16 @@ if ($res = $connection->query($sql)) {
     $res->close();
 }
 
-$sql = "SELECT `username`, `rating`, `message` FROM `rating`
+$sql = "SELECT `username`, `rating`, `message`, `userid` FROM `rating`
 INNER JOIN `user` ON `user`.`id` = `rating`.`userid`
 WHERE `movieid` = $id";
 if ($res = $connection->query($sql)) {
     $answer['ratings'] = [];
+    $answer['rated'] = false;
     while ($row = $res->fetch_assoc()) {
+        if ($row['userid'] == (isset($_SESSION['user']) ? $_SESSION['user']['id'] : -1)) {
+            $answer['rated'] = true;
+        }
         $answer['ratings'][] = $row;
     }
     $res->close();

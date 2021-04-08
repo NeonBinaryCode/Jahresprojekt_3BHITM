@@ -1,8 +1,9 @@
 (() => {
-    let id = -1;
+    let starCount = 0;
     let selectDate = $('#select-date')[0];
     function fetchData() {
         $.post('../api/get-movie-new.php', { id: getQuery('id') }, (data) => {
+            console.log(data);
             data = JSON.parse(data);
             data.information = JSON.parse(data.information);
             console.log(data);
@@ -34,23 +35,37 @@
             }
             updateLink();
 
-            let averageRating = 0;
-            for (let rating of data.ratings) {
-                averageRating += Number(rating.rating);
+            let ratingsDiv = $('.ratings')[0];
+            if (data.ratings.length > 0) {
+                let averageRating = 0;
+                for (let rating of data.ratings) {
+                    let str = `<div class="rating">
+                                <div class="user">
+                                    <div class="name">${rating.username}</div>
+                                </div>
+                                <div class="stars">${'<i class="fas fa-star"></i>'.repeat(
+                                    rating.rating
+                                )}${'<i class="far fa-star"></i>'.repeat(
+                        5 - rating.rating
+                    )}</div>
+                                <div class="text">${rating.message}</div>
+                            </div>`;
+                    ratingsDiv.innerHTML += str;
+                    averageRating += Number(rating.rating);
+                }
+                averageRating /= data.ratings.length;
+                averageRating = Math.round(averageRating);
+
+                let ratingElem = $('.star-rating')[0];
+                ratingElem.innerHTML = `${'<i class="fas fa-star"></i>'.repeat(
+                    averageRating
+                )}${'<i class="far fa-star"></i>'.repeat(5 - averageRating)}`;
             }
-            averageRating /= data.ratings.length;
-            averageRating = Math.round(averageRating);
-            let stars = [
-                '<i class="fas fa-star"></i>',
-                '<i class="far fa-star"></i>',
-            ];
-            let ratingElem = $('.star-rating')[0];
-            ratingElem.innerHTML = '';
-            for (let i = 0; i < 5; i++) {
-                if (i < averageRating) {
-                    ratingElem.innerHTML += stars[0];
-                } else {
-                    ratingElem.innerHTML += stars[1];
+
+            if (!getCookie('loggedOn') || data.rated) {
+                $('.your-rating').addClass('hidden');
+                if (data.ratings.length == 0) {
+                    $('.ratings').addClass('hidden');
                 }
             }
         });
@@ -64,5 +79,54 @@
         $(
             '#start-reservation'
         )[0].href = `../book-seats/?id=${selectDate.value}`;
+    }
+
+    function submitRating() {
+        let message = $('.your-rating textarea')[0].value;
+        if (starCount <= 0 || starCount > 5) {
+            $('.your-rating .star-select').addClass('invalid');
+        }
+        if (message.length <= 0) {
+            $('.your-rating textarea').addClass('invalid');
+        }
+
+        if (starCount > 0 && starCount <= 5 && message.length > 0) {
+            let req = {
+                message: message,
+                rating: starCount,
+                movie: getQuery('id'),
+            };
+            console.log(req);
+            $.post('../api/submit-rating.php', req, (res) => {
+                res = JSON.parse(res);
+                if (res.status == 'success') {
+                    window.location.reload();
+                } else {
+                    $('.your-rating textarea').addClass('invalid');
+                }
+            });
+        }
+    }
+
+    $('.your-rating textarea')[0].addEventListener('input', () => {
+        $('.your-rating textarea').removeClass('invalid');
+    });
+
+    $('#submit-rating').click(submitRating);
+
+    let elems = $('.star-select > *');
+    for (let i = 0; i < elems.length; i++) {
+        let elem = elems[i];
+        elem.addEventListener('click', () => {
+            $('.your-rating .star-select').removeClass('invalid');
+            starCount = i + 1;
+            for (let j = 0; j < elems.length; j++) {
+                if (j <= i) {
+                    elems[j].innerHTML = '<i class="fas fa-star"></i>';
+                } else {
+                    elems[j].innerHTML = '<i class="far fa-star"></i>';
+                }
+            }
+        });
     }
 })();

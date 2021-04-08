@@ -1,82 +1,180 @@
 .container-main {
-	margin-top: 15vh;
-	background: var(--box-color);
-	padding: 3vh 3vw;
-	border-radius: 2vw;
+    margin-top: 15vh;
+    background: var(--box-color);
+    padding: 3vh 3vw;
+    border-radius: 2vw;
 }
 
 .movie-overview > * {
-	margin-bottom: 3vh;
+    margin-bottom: 3vh;
 }
 
 .movie-poster {
-	width: 80%;
+    width: 80%;
 }
 
 .movie-title {
-	font-size: 2rem;
-	font-family: var(--headings) !important;
-	font-weight: bold;
-	text-align: center;
+    font-size: 2rem;
+    font-family: var(--headings) !important;
+    font-weight: bold;
+    text-align: center;
 }
 
 .general-information {
-	margin: 0.1rem 0;
+    margin: 0.1rem 0;
 }
 
 .general-information td {
-	padding-right: 1vw;
+    padding-right: 1vw;
 }
 
 .seat-reservation {
-	display: inline-block;
+    display: inline-block;
 }
 
 .seat-reservation .sub-heading {
-	font-family: var(--headings);
-	font-weight: bold;
-	margin: 0 0 1rem !important;
-	padding: 0 0.1vw 2px 0;
-	border-bottom: var(--font-color) 1px solid;
+    font-family: var(--headings);
+    font-weight: bold;
+    margin: 0 0 1rem !important;
+    padding: 0 0.1vw 2px 0;
+    border-bottom: var(--font-color) 1px solid;
 }
 
 .seat-reservation select {
-	margin-left: 0.5vw;
-	padding: 0.2rem;
+    margin-left: 0.5vw;
+    padding: 0.2rem;
 }
 
 .seat-reservation select,
 .seat-reservation option {
-	background-color: var(--background-color);
-	border: var(--font-color) 1px solid;
+    background-color: var(--background-color);
+    border: var(--font-color) 1px solid;
 }
 
 .seat-reservation a {
-	display: inline-block;
-	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
-	color: var(--accent-color);
-	border: 1px solid var(--accent-color);
-	border-radius: 5px;
-	padding: 0.375rem 0.75rem;
-	margin-top: 0.8rem;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    padding: 0.375rem 0.75rem;
+    margin-top: 0.8rem;
 }
 
 .seat-reservation a:hover {
-	color: var(--accent-color);
-	background-color: var(--accent-color-rgba);
-	text-decoration: none;
+    color: var(--accent-color);
+    background-color: var(--accent-color-rgba);
+    text-decoration: none;
+}
+
+.rating {
+    border-radius: 1vw;
+    padding: 1vh 1vw;
+    background-color: var(--background-color);
+    margin-bottom: 2vh;
+}
+
+.rating .user,
+.rating .user .name {
+    display: inline-block;
+}
+
+.rating .user {
+    margin-right: 1vw;
+}
+
+.rating .user .name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.rating .stars {
+    display: inline;
+}
+
+.rating .text {
+    margin-top: 0.5vh;
+}
+
+.your-rating {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 3vh 1vw;
+    border-radius: 1vw;
+    border: var(--font-color) 1px solid;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.your-rating .star-select {
+    user-select: none;
+}
+
+.your-rating .star-select.invalid * {
+    color: red;
+}
+
+.your-rating .star-select div {
+    display: inline;
+}
+
+.your-rating textarea {
+    width: 60%;
+    padding: 1vh 1vw;
+    background: var(--background-color);
+    border: var(--font-color) 1px solid;
+}
+
+.your-rating textarea.invalid {
+    border-color: red;
+}
+
+.your-rating button {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.2rem;
+    background: none;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--accent-color);
+}
+
+.your-rating button:hover {
+    background: var(--accent-color-rgba);
 }
 
 @media only screen and (max-width: 800px) {
-	.movie-overview {
-		display: grid;
-		grid-template-columns: auto;
-		grid-template-rows: auto auto;
-	}
+    .movie-overview {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
 
-	.container-main {
-		padding: 3vh 8vw;
-	}
+    .container-main {
+        padding: 3vh 8vw;
+    }
+
+    .rating {
+        padding: 1vh 3vw;
+    }
+
+    .your-rating {
+        padding: 1vh 3vw;
+        flex-direction: column;
+        align-content: space-between;
+    }
+
+    .your-rating > * {
+        margin-top: 1vh;
+    }
+
+    .your-rating > *:first-child {
+        margin-top: 0;
+    }
+
+    .your-rating textarea {
+        width: 100%;
+    }
 }
