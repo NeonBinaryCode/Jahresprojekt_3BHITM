@@ -63,6 +63,10 @@
     border: var(--font-color) 1px solid;
 }
 
+.account-data input.invalid {
+    border-color: red;
+}
+
 @media only screen and (max-width: 700px) {
     .container-main {
         width: 90%;
