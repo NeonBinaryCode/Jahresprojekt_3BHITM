@@ -46,6 +46,10 @@ if (count($errors) == 0) {
 
     if ($res = $connection->query($sql)) {
         $answer = ['message' => 'Account erstellt', 'status' => 'success'];
+        $sql = "SELECT `id`, `email` FROM `user` WHERE `username` = '$username'";
+        $res = $connection->query($sql);
+        $res = $res->fetch_assoc();
+        $_SESSION['verify'] = ['name' => $username, 'id' => $res['id'], 'email' => $res['email']];
     } else {
         $answer = ['status' => 'fail', 'message' => 'Name oder E-Mail existiert bereits'];
     }

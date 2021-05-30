@@ -38,7 +38,6 @@ function signup() {
             password: pwd1,
             password2: pwd2,
         };
-        console.log(data);
         $.post('../api/sign-up-new.php', data, (res) => {
             console.log(res);
             res = JSON.parse(res);
@@ -46,7 +45,7 @@ function signup() {
                 console.log(res);
                 // setCookie('token', res.token);
                 // setCookie('user', name);
-                location.reload();
+                window.location = '../verify';
             }
         });
     } else {
@@ -67,6 +66,10 @@ function signup() {
         }
         if (!emailRegex.test(email)) {
             $('.email.input').addClass('invalid');
+        }
+        if (pwd1 != pwd2) {
+            $('.password.input').addClass('invalid');
+            $('.password-verify.input').addClass('invalid');
         }
     }
 }
