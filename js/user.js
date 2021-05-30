@@ -1,5 +1,6 @@
 const usernameRegex = /^[A-Za-z0-9 .]{3,30}$/;
-const emailRegex = /^(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+const emailRegex =
+    /^(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
 
 $.post('../api/get-user.php', {}, (res) => {
     $('#username-placeholder').text(res);
@@ -7,11 +8,20 @@ $.post('../api/get-user.php', {}, (res) => {
 });
 
 function fetchUserData() {
+    $.post('../api/get-user.php', {}, (res) => {
+        $('#username-placeholder').text(res);
+        $('#logout-button').click(logout);
+    });
+
     $.post('../api/user-data-new.php', {}, (res) => {
+        console.log(res);
         res = JSON.parse(res);
         if (res.status == 'success') {
             $('.email .data').text(res.email);
             $('.username .data').text(res.username);
+            $('.profilepicture img')[0].src =
+                '../media/profilepictures/' + res.profilepicture;
+            console.log(res.profilepicture);
             if ((res.reservations.length ?? 0) > 0) {
                 $('.reserved-seats').removeClass('hidden');
                 $('.reserved-seats .data')[0].innerHTML = '';
