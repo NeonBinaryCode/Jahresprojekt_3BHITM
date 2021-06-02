@@ -59,6 +59,7 @@ $mail->Subject = 'Account Verification';
 $html = file_get_contents('media/contents.html');
 $html = str_replace('{#name}', $name, $html);
 $html = str_replace('{#id}', $id, $html);
+$html = str_replace('{#x}', md5('$W4G' . $name), $html);
 $mail->msgHTML($html, __DIR__);
 
 //Replace the plain text body with one created manually

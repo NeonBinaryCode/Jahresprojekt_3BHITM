@@ -13,15 +13,22 @@ if ($connection->connect_error) {
 }
 
 $id = $connection->real_escape_string($_GET['id']);
+$x = $_GET['x'];
 
 if (strlen($id) == 0) {
     echo "Keine gültige UserID.";
     exit;
 }
 
-$sql = "UPDATE `user` SET `opted_in` = '1' WHERE `user`.`id` = $id;";
-if ($connection->query($sql)) {
-    echo "Registrierung abgeschlossen, Sie können Ihren Account jetzt verwenden.";
+$sql = "SELECT `username` FROM `user` WHERE `user`.`id` = $id;";
+$res = $connection->query($sql);
+if ($res && $x == md5('$W4G' . $res->fetch_assoc()['username'])) {
+    $sql = "UPDATE `user` SET `opted_in` = '1' WHERE `user`.`id` = $id;";
+    if ($connection->query($sql)) {
+        echo "Registrierung abgeschlossen, Sie können Ihren Account jetzt verwenden.";
+    } else {
+        echo "Bei der Registrierung ist es zu einem Problem gekommen, bitte versuchen Sie es später erneut.";
+    }
 } else {
     echo "Bei der Registrierung ist es zu einem Problem gekommen, bitte versuchen Sie es später erneut.";
 }
