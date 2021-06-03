@@ -32,7 +32,7 @@ if ($id == -1) {
         if ($connection->query("SELECT * FROM `user` WHERE `email`='$email'")->num_rows > 0) {
             $exit = true;
         } else {
-            $sql = "UPDATE `user` SET `email`='$email' WHERE `id`=$id";
+            $sql = "UPDATE `user` SET `email`='$email', `opted_in`=0 WHERE `id`=$id";
         }
     } else {
         $exit = true;
@@ -44,6 +44,7 @@ if ($id == -1) {
             if ($res->num_rows > 0) {
                 $_SESSION['login'] = 1;
                 $_SESSION['user'] = $res->fetch_assoc();
+                $_SESSION['verify'] = ['name' => $_SESSION['user']['username'], 'id' => $_SESSION['user']['id'], 'email' => $_SESSION['user']['email']];
             } else {
                 $answer = ['status' => 'fail', 'message' => 'Falsche Login-Daten'];
             }
