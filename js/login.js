@@ -49,19 +49,25 @@ function signup() {
     } else {
         if (!passwordRegex.test(pwd1)) {
             $('.password.input').addClass('invalid');
+            $('.password.message').removeClass('hidden');
         }
         if (!passwordRegex.test(pwd2)) {
             $('.password-verify.input').addClass('invalid');
+            $('.password-verify.message').removeClass('hidden');
         }
         if (!usernameRegex.test(name)) {
             $('.username.input').addClass('invalid');
+            $('.username.message').removeClass('hidden');
         }
         if (!emailRegex.test(email)) {
             $('.email.input').addClass('invalid');
+            $('.email.message').removeClass('hidden');
         }
         if (pwd1 != pwd2) {
             $('.password.input').addClass('invalid');
             $('.password-verify.input').addClass('invalid');
+            $('.password.message').removeClass('hidden');
+            $('.password-verify.message').removeClass('hidden');
         }
     }
 }

@@ -26,7 +26,7 @@
     font-family: var(--headings) !important;
     font-weight: bold;
     font-size: 1.5rem;
-    margin-bottom: 5vh;
+    margin-bottom: 3.5vh;
 }
 
 .container-main button {
@@ -81,7 +81,7 @@
 }
 
 .container-main > div > div {
-    margin-top: 2vh;
+    margin-top: 1.5vh;
     border-radius: 0.3vw;
     box-sizing: border-box;
     display: flex;
@@ -107,6 +107,12 @@
 
 .input.invalid {
     border-color: red;
+}
+
+.container-main > div > .message {
+    margin-top: 0.5vh;
+    font-size: 0.75rem;
+    color: red;
 }
 
 .login svg,
