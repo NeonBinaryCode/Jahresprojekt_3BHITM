@@ -1,5 +1,13 @@
 # Jahresprojekt 3BHITM - Lensscape Filmfestival
 
+## v1.0 - Finale Abgabe
+
+- Double-opt-in mit E-Mail Versand
+- Upload und automatische Skalierung von Profilbildern
+- Ausgabe von Fehlern, beim Sign-Up
+- Visuelle Indikatoren für Funktionen, die nicht verfügbar sind
+- Bugfixes
+
 ## v0.3 - Zwischenabgabe 3
 
 -   Änderung von Accountdaten
@@ -9,13 +17,6 @@
 -   Erstellen einer neuen Bewertung, wennman angemeldet ist
 -   Eingabeüberprüfung von Formularen auf dem Server (mittels Regex und MySQL real_escape_string )
 -   Speichern von Daten in Datenbank statt JSON-Files
-
-### TODO
-
-Nicht geschafft aufgrund von Zeitmangel:
-
--   Gestaltung eine Logos
--   Rückmeldung nach Sitzplatzreservierung
 
 ## v0.2 - Semesterabgabe
 
