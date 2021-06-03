@@ -52,8 +52,8 @@ if (isset($_POST["submit"]) && isset($_FILES["fileToUpload"]) && $_FILES["fileTo
     $maxHeight = 128;
 
     // Ausmaße kopieren, wir gehen zuerst davon aus, dass das Bild schon Thumbnailgröße hat
-    $scaledWidth = $imageWidth;  # 451
-    $scaledHeight = $imageHeight; # 805
+    $scaledWidth = $imageWidth;  
+    $scaledHeight = $imageHeight; 
 
     $xOff = 0;
     $yOff = 0;
@@ -62,8 +62,8 @@ if (isset($_POST["submit"]) && isset($_FILES["fileToUpload"]) && $_FILES["fileTo
     if ($scaledWidth <= $scaledHeight) {
         $factor = $maxWidth / $scaledWidth;
         $scaledWidth *= $factor;
-        $scaledHeight = ceil($scaledHeight * $factor); # 229
-        $yOff = floor(($scaledHeight - $maxHeight) / 2); # 50
+        $scaledHeight = ceil($scaledHeight * $factor); 
+        $yOff = floor(($scaledHeight - $maxHeight) / 2);
     } else {
         $factor = $maxHeight / $scaledHeight;
         $scaledWidth = ceil($scaledWidth * $factor);
