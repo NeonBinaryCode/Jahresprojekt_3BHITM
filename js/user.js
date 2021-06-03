@@ -21,6 +21,7 @@ function uploadProfilePicture() {
             } else {
                 console.log(res.message);
             }
+            $('form.profilepicture .message').html(res.message);
         },
     });
 }
@@ -43,6 +44,9 @@ function fetchUserData() {
                 res.profilepicture +
                 '?' +
                 performance.now();
+            if (res.opted_in == 1) {
+                $('#warning').addClass('hidden');
+            }
             if ((res.reservations.length ?? 0) > 0) {
                 $('.reserved-seats').removeClass('hidden');
                 $('.reserved-seats .data')[0].innerHTML = '';
@@ -122,3 +126,11 @@ for (let input of $('.input')) {
 }
 
 fetchUserData();
+
+function sendEmail() {
+    $.post('../api/send-mail.php', {}, (res) => {
+        console.log(res);
+    });
+}
+
+$('#send-new').click(sendEmail);
