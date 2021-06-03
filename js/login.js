@@ -39,22 +39,14 @@ function signup() {
             password2: pwd2,
         };
         $.post('../api/sign-up-new.php', data, (res) => {
-            console.log(res);
             res = JSON.parse(res);
             if (res.status == 'success') {
-                console.log(res);
                 // setCookie('token', res.token);
                 // setCookie('user', name);
                 window.location = '../verify';
             }
         });
     } else {
-        console.log(
-            'Data invalid',
-            passwordRegex.test(pwd1),
-            usernameRegex.test(name),
-            emailRegex.test(email)
-        );
         if (!passwordRegex.test(pwd1)) {
             $('.password.input').addClass('invalid');
         }
@@ -85,7 +77,6 @@ function login() {
         data = { username: name, password: pwd };
     }
     $.post('../api/login-new.php', data, (res) => {
-        console.log(res);
         res = JSON.parse(res);
         if (res.status == 'success') {
             document.location = document.referrer;

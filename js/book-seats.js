@@ -213,7 +213,6 @@ function bookSeats() {
             cols: selectedCols,
         };
         $.post('../api/submit-seating-new.php', data, (res) => {
-            console.log(res);
             res = JSON.parse(res);
             if (res.status == 'success') {
                 document.location = document.referrer;
@@ -227,7 +226,6 @@ async function loadData() {
         id: getQuery('id'),
     };
     $.post('../api/get-seating-new.php', data, (res) => {
-        console.log(JSON.parse(res));
         states = JSON.parse(res).seats;
         // Lücken zwischen Sitzplätzen um Corona-konform zu sein, später am Server
         for (let i = 0; i < rows; i++) {

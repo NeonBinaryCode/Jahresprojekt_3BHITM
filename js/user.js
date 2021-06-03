@@ -62,7 +62,7 @@ function fetchUserData() {
 }
 
 function logout() {
-    $.post('../api/reset-session.php', {}, (res) => console.log(res));
+    $.post('../api/reset-session.php', {}, () =>{});
     deleteCookie('loggedOn');
     setTimeout(() => {
         window.location.href = '../login/';

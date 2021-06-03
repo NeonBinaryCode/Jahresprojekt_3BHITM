@@ -3,10 +3,8 @@
     let selectDate = $('#select-date')[0];
     function fetchData() {
         $.post('../api/get-movie-new.php', { id: getQuery('id') }, (data) => {
-            console.log(data);
             data = JSON.parse(data);
             data.information = JSON.parse(data.information);
-            console.log(data);
             $('.movie-poster')[0].src = `../media/${data.poster}`;
             $('.movie-title').text(data.title);
             $('.movie-description').text(data.description);
@@ -99,7 +97,6 @@
                 rating: starCount,
                 movie: getQuery('id'),
             };
-            console.log(req);
             $.post('../api/submit-rating.php', req, (res) => {
                 res = JSON.parse(res);
                 if (res.status == 'success') {
