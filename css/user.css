@@ -77,6 +77,12 @@
     margin: 0 1vw 0;
 }
 
+.account-data .profilepicture .message {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 1vh;
+}
+
 .account-data .profilepicture input {
     align-self: center;
     max-width: calc(100% - 3rem - 2vw);
