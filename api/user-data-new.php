@@ -15,7 +15,7 @@ if ($connection->connect_error) {
 $user = isset($_SESSION['user']) ? $_SESSION['user']['username'] : '';
 
 if (strlen($user) > 0) {
-    $answer = ['status' => 'success', 'email' => $_SESSION['user']['email'], 'username' => $user, 'profilepicture' => $_SESSION['user']['profilepicture']];
+    $answer = ['status' => 'success', 'email' => $_SESSION['user']['email'], 'username' => $user, 'profilepicture' => $_SESSION['user']['profilepicture'], 'opted_in' => $_SESSION['user']['opted_in']];
 
     $sql = "SELECT *  FROM `reservation` INNER JOIN `showing`ON (`reservation`.`showingid`=`showing`.`id`) WHERE `userid`=" .  (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : -1);
     if ($res = $connection->query($sql)) {

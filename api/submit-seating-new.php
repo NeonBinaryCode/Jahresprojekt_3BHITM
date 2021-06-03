@@ -12,7 +12,7 @@ if ($connection->connect_error) {
     die('Database connection failed: ' . $connection->connect_error);
 }
 
-if (isset($_SESSION['user']['id'])) {
+if (isset($_SESSION['user']['id']) && $_SESSION['user']['opted_in'] == 1) {
     $user = $_SESSION['user']['id'];
     $id = isset($_POST['id']) ? $connection->real_escape_string($_POST['id']) : -1;
     $row = isset($_POST['row']) ? $connection->real_escape_string($_POST['row']) : -1;

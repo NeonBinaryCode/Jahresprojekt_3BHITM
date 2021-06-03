@@ -2,6 +2,10 @@
 
 session_start();
 
+if (!isset($_SESSION['verify'])) {
+    $_SESSION['verify'] = ['name' => $_SESSION['user']['username'], 'id' => $_SESSION['user']['id'], 'email' => $_SESSION['user']['email']];
+}
+
 $name = $_SESSION['verify']['name'];
 $id = $_SESSION['verify']['id'];
 $emailAddress = $_SESSION['verify']['email'];
