@@ -31,7 +31,7 @@ if ($res = $connection->query($sql)) {
     $res->close();
 }
 
-$sql = "SELECT `username`, `rating`, `message`, `userid` FROM `rating`
+$sql = "SELECT `username`, `rating`, `message`, `userid`, `profilepicture` FROM `rating`
 INNER JOIN `user` ON `user`.`id` = `rating`.`userid`
 WHERE `movieid` = $id";
 if ($res = $connection->query($sql)) {

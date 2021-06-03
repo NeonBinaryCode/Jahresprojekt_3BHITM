@@ -41,6 +41,9 @@
                 for (let rating of data.ratings) {
                     let str = `<div class="rating">
                                 <div class="user">
+                                    <img class="profilepicture" src="../media/profilepictures/${
+                                        rating.profilepicture
+                                    }?${performance.now()}" />
                                     <div class="name">${rating.username}</div>
                                 </div>
                                 <div class="stars">${'<i class="fas fa-star"></i>'.repeat(

@@ -7,6 +7,26 @@ $.post('../api/get-user.php', {}, (res) => {
     $('#logout-button').click(logout);
 });
 
+function uploadProfilePicture() {
+    $.ajax({
+        url: $('form.profilepicture').attr('action'),
+        type: $('form.profilepicture').attr('method'),
+        dataType: 'JSON',
+        data: new FormData($('form.profilepicture')[0]),
+        processData: false,
+        contentType: false,
+        success: (res) => {
+            if (res.status == 'success') {
+                fetchUserData();
+            } else {
+                console.log(res.message);
+            }
+        },
+    });
+}
+
+$('#profilepicture-input').change(uploadProfilePicture);
+
 function fetchUserData() {
     $.post('../api/get-user.php', {}, (res) => {
         $('#username-placeholder').text(res);
@@ -14,14 +34,15 @@ function fetchUserData() {
     });
 
     $.post('../api/user-data-new.php', {}, (res) => {
-        console.log(res);
         res = JSON.parse(res);
         if (res.status == 'success') {
             $('.email .data').text(res.email);
             $('.username .data').text(res.username);
             $('.profilepicture img')[0].src =
-                '../media/profilepictures/' + res.profilepicture;
-            console.log(res.profilepicture);
+                '../media/profilepictures/' +
+                res.profilepicture +
+                '?' +
+                performance.now();
             if ((res.reservations.length ?? 0) > 0) {
                 $('.reserved-seats').removeClass('hidden');
                 $('.reserved-seats .data')[0].innerHTML = '';

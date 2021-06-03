@@ -42,15 +42,22 @@
         <div class="container container-main">
             <h1>Eingeloggt als <span id="username-placeholder"></span></h1>
             <div class="account-data">
-                <div class="profilepicture row">
+                <form
+                    action="../api/upload-profilepicture.php"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="profilepicture row"
+                >
                     <img src="../media/profilepictures/default.png" />
+                    <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+                    <input type="hidden" name="submit" />
                     <input
                         type="file"
-                        name="profilepicture"
+                        name="fileToUpload"
                         id="profilepicture-input"
-                        accept="image/jpeg, image/png"
+                        accept="image/jpeg, image/png, image/gif"
                     />
-                </div>
+                </form>
                 <div class="email row">
                     <p class="label col-lg-4 col-md-12">E-Mail:</p>
                     <p class="data col-lg-6 col-md-12"></p>
