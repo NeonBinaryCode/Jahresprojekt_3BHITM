@@ -103,6 +103,11 @@ body {
     border-color: var(--box-color-alt);
 }
 
+.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
 h1,
 h2,
 h3 {

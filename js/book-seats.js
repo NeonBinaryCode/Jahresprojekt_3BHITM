@@ -222,6 +222,15 @@ function bookSeats() {
 }
 
 async function loadData() {
+    
+    $.post('../api/get-opted-in.php', {} , (data) => {
+        console.log(data == "");
+        if (data == "" || parseInt(data) == 0) {
+            $('.btn-book')[0].disabled = true;
+            $('.btn-book').addClass('disabled');
+        }
+    })
+
     let data = {
         id: getQuery('id'),
     };

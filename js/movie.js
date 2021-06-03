@@ -2,6 +2,13 @@
     let starCount = 0;
     let selectDate = $('#select-date')[0];
     function fetchData() {
+        $.post('../api/get-opted-in.php', {} , (data) => {
+            console.log(data == "");
+            if (data == "" || parseInt(data) == 0) {
+                $('#start-reservation').addClass('disabled');
+            }
+        })
+
         $.post('../api/get-movie-new.php', { id: getQuery('id') }, (data) => {
             data = JSON.parse(data);
             data.information = JSON.parse(data.information);
