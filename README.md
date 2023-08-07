@@ -1,5 +1,14 @@
 # Jahresprojekt 3BHITM - Lensscape Filmfestival
 
+Jahresprojekt an der HTL Leonding in der 3BHITM
+
+Anforderungen:
+- Webprojekt
+- PHP im Backend
+- XAMPP
+
+Thema: Website für ein Filfestival mit unterschiedlichen Filmen zur Auswahl und Sitzplatzwahl (p5.js)
+
 ## v1.0 - Finale Abgabe
 
 - Double-opt-in mit E-Mail Versand
